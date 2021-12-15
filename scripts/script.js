@@ -96,7 +96,7 @@ const blurObser = function (entries) {
 
 const blurObserver = new IntersectionObserver(blurObser, {
   root: null,
-  rootMargin: "-200px",
+  rootMargin: "100px",
 });
 
 blurred.forEach((img) => {
