@@ -96,6 +96,7 @@ const blurObser = function (entries) {
 
 const blurObserver = new IntersectionObserver(blurObser, {
   root: null,
+  threshold: [0, 0.1, 0.5],
   rootMargin: "100px",
 });
 
