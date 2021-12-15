@@ -115,3 +115,7 @@ h2 {
 .text-center {
   text-align: center;
 }
+
+.blur {
+  filter: blur(15px);
+}

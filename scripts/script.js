@@ -26,8 +26,6 @@ navigation.addEventListener("click", (e) => {
   e.preventDefault();
   // if (!e.target.dataset.number) return;
 
-  console.log(e.target);
-
   const navNumber = e.target.getAttribute("data-number");
 
   switch (Number(navNumber)) {
@@ -59,7 +57,6 @@ navigation.addEventListener("click", (e) => {
 const sectionHero = document.querySelector(".section-hero");
 const stickyNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
 
   if (!entry.isIntersecting) {
     document.body.classList.add("sticky");
@@ -75,3 +72,31 @@ const observer = new IntersectionObserver(stickyNav, {
 });
 
 observer.observe(sectionHero);
+
+/////////////////blur effect
+
+const blurred = document.querySelectorAll(".blur");
+
+const blurObser = function (entries) {
+  const [entry] = entries;
+
+  if (entry.isIntersecting) {
+    const item = entry.target;
+    const link = item.dataset.mainImg;
+    console.log(link);
+    item.setAttribute("src", link);
+    item.addEventListener("load", (e) => {
+      item.classList.remove("blur");
+      blurObserver.unobserve(item);
+    });
+  }
+};
+
+const blurObserver = new IntersectionObserver(blurObser, {
+  root: null,
+  threshold: 0,
+});
+
+blurred.forEach((img) => {
+  blurObserver.observe(img);
+});
