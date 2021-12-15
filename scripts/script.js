@@ -78,23 +78,25 @@ observer.observe(sectionHero);
 const blurred = document.querySelectorAll(".blur");
 
 const blurObser = function (entries) {
-  const [entry] = entries;
+  //const [entry, entry2] = entries;
 
-  if (entry.isIntersecting) {
-    const item = entry.target;
-    const link = item.dataset.mainImg;
-    console.log(link);
-    item.setAttribute("src", link);
-    item.addEventListener("load", (e) => {
-      item.classList.remove("blur");
-      blurObserver.unobserve(item);
-    });
-  }
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const item = entry.target;
+      const link = item.dataset.mainImg;
+      console.log(link);
+      item.setAttribute("src", link);
+      item.addEventListener("load", (e) => {
+        item.classList.remove("blur");
+        blurObserver.unobserve(item);
+      });
+    }
+  });
 };
 
 const blurObserver = new IntersectionObserver(blurObser, {
   root: null,
-  threshold: 0,
+  rootMargin: "-200px",
 });
 
 blurred.forEach((img) => {
